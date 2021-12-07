@@ -46,7 +46,8 @@
 void setup()
 {
 
-  Serial.begin(9600);                             // begin serial monitor
+  Serial.begin(9600);      
+                                                   // begin serial monitor
   pinMode(trigpin,OUTPUT);
   
   pinMode(echopin,INPUT);
@@ -93,31 +94,48 @@ void loop()
   
   
   { 
-  for (pos = 0; pos <= 180; pos += 5) {            // goes from 0 degrees to 180 degrees with angle changing with discrete value of 5n
-    // in steps of 5 degree
+  
+  for (pos = 0; pos <= 180; pos += 5)
+  
+  {                                 // goes from 0 degrees to 180 degrees with angle changing with discrete value of 5n
+                                    // in steps of 5 degree
     myservo.write(pos);
+    
     digitalWrite(trigpin,LOW);
+    
   delayMicroseconds(10);
+  
   digitalWrite(trigpin,HIGH);
+  
   delayMicroseconds(10);
+  
   digitalWrite(trigpin,LOW);
  
   
     
 
   traveltime=pulseIn(echopin,HIGH);
+  
   Serial.print(traveltime);
+  
   Serial.print("   ");
 
   box =34300*traveltime/1000000;
+  
   distance =box/2;
+  
   Serial.print(distance);
+  
   Serial.println(" cm"); 
+  
    if(distance<=10)
    {
     digitalWrite(redled,HIGH);
+    
     delay(200);
+    
     digitalWrite(redled,LOW);
+    
     }
   }
   }
@@ -128,37 +146,59 @@ void loop()
    potvalue=analogRead(potpin);                   //read value from remote controller (potentiometer)
    
    newpotvalue=potvalue*180/1023;
+   
    Serial.print(newpotvalue);
+   
    Serial.print(" degree  ");
+   
    myservo.write(newpotvalue);
 
    myservo.write(newpotvalue);
+   
    digitalWrite(trigpin,LOW);
+   
    delayMicroseconds(10);
+   
    digitalWrite(trigpin,HIGH);
+   
    delayMicroseconds(10);
+   
    digitalWrite(trigpin,LOW);
  
   
     
 
   traveltime=pulseIn(echopin,HIGH);
+  
   Serial.print(traveltime);
+  
   Serial.print("   ");
 
   box =34300*traveltime/1000000;
+  
   distance =box/2;
+  
   Serial.print(distance);
+  
   Serial.println(" cm");
+  
   if(distance<=10)
+  
    {
-    digitalWrite(redled,HIGH);                   // WARNING light !
+   
+    digitalWrite(redled,HIGH);          
+                                                     // WARNING light !
     delay(200);
+    
     digitalWrite(redled,LOW);
+    
   }
 
  
+ 
    delay(1000);                      
+   
   }
+  
 }
   
